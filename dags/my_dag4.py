@@ -1,4 +1,4 @@
-from airflow.sdk import dag, task
+from airflow.sdk import dag, task, chain
 from pendulum import datetime
 
 @dag(
@@ -31,8 +31,9 @@ def my_dag():
         print("Hello from task_e")
 
     # Set task dependencies
-    a = task_a()
-    a >> task_b() >> task_c()
-    a >> task_d() >> task_e()
+    chain(task_a(), [task_b(), task_d()], [task_c(), task_e()])
+    # a = task_a()
+    # a >> task_b() >> task_c()
+    # a >> task_d() >> task_e()
 
 my_dag()

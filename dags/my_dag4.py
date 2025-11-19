@@ -32,7 +32,7 @@ def my_dag():
 
     # Set task dependencies
     a = task_a()
-    a >> [task_b(), task_c()]
-    a >> [task_d(), task_e()]
+    a >> task_b() >> task_c()
+    a >> task_d() >> task_e()
 
 my_dag()

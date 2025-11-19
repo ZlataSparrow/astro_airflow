@@ -27,6 +27,6 @@ def my_dag():
         print("Hello from task_d")
 
     # Set task dependencies
-    task_a() >> task_b() >> task_c() >> task_d()
+    task_a() >> task_b() >> [task_c(), task_d()]
 
 my_dag()

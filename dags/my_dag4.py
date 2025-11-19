@@ -11,29 +11,32 @@ from pendulum import datetime
 def my_dag():
 
     @task
-    def task_a():
-        print("Hello from task_a")
+    def task_a(): ...
 
     @task
-    def task_b():
-        print("Hello from task_b")
+    def task_b(): ...
 
     @task
-    def task_c():
-        print("Hello from task_c")
+    def task_c(): ...
 
     @task
-    def task_d():
-        print("Hello from task_d")
+    def task_d(): ...
 
     @task
-    def task_e():
-        print("Hello from task_e")
+    def task_e(): ...
 
-    # Set task dependencies
-    chain(task_a(), [task_b(), task_d()], [task_c(), task_e()])
-    # a = task_a()
-    # a >> task_b() >> task_c()
-    # a >> task_d() >> task_e()
+    a = task_a()
+    b = task_b()
+    c = task_c()
+    d = task_d()
+    e = task_e()
+
+    # either with chain:
+    chain(a, [b, d], [c, e])
+
+    # or explicitly:
+    # a >> [b, d]
+    # b >> c
+    # d >> e
 
 my_dag()
